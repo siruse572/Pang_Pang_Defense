@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 2581678993758101685}
   - component: {fileID: -8429278369865584205}
   - component: {fileID: -4382769055331879496}
+  - component: {fileID: 9120820538197127553}
   m_Layer: 0
   m_Name: LittleGhost_5
   m_TagString: Untagged
@@ -379,6 +380,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   candyTarget: {fileID: 5134862719673873475, guid: 9d19460ee7a4b23409c2218c7ba9705a, type: 3}
   attackRange: 1
+  navMeshSampleRadius: 2
+  spawner: {fileID: 0}
+--- !u!114 &9120820538197127553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544760490029538023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b0ad9a846b69e45bfd2cddc64a0756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 3
+  currentHealth: 0
 --- !u!1 &1822426476098491784
 GameObject:
   m_ObjectHideFlags: 0
