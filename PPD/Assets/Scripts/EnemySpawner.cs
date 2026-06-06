@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // UI 패키지 추가
+using UnityEngine.Rendering;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Lighting")]
-    public Light directionalLight;
 
     [Header("생성할 적 프리팹 4종류")]
     public GameObject[] enemyPrefabs;
@@ -51,10 +50,9 @@ public class EnemySpawner : MonoBehaviour
             startButton.interactable = false;
         }
 
-        if (directionalLight != null)
-        {
-            directionalLight.intensity = 0.3f;
-        }
+        
+        RenderSettings.ambientLight = Color.gray;
+        
         // 웨이브 시작 시 Skybox 변경
         RenderSettings.skybox = waveSkybox;
 
@@ -103,10 +101,9 @@ public class EnemySpawner : MonoBehaviour
             // 원래 Skybox로 복구
             RenderSettings.skybox = normalSkybox;
 
-            if (directionalLight != null)
-            {
-                directionalLight.intensity = 1f;
-            }
+           
+            RenderSettings.ambientLight = Color.white;
+            
 
             Debug.Log($"웨이브 {currentWave} 종료!");
         }

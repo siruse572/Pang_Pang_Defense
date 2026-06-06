@@ -25,6 +25,9 @@ public class CubeProjectile : MonoBehaviour
     private bool hasHit;
     private Transform target;
 
+    private float maxRange = -1f;
+    private Vector3 spawnPosition;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,6 +42,7 @@ public class CubeProjectile : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        spawnPosition = transform.position;
     }
 
     /// <summary>
@@ -61,8 +65,28 @@ public class CubeProjectile : MonoBehaviour
         target = newTarget;
     }
 
+    /// <summary>
+    /// 발사체의 최대 사거리를 설정합니다.
+    /// </summary>
+    public void SetRange(float range, Vector3 spawnPos)
+    {
+        maxRange = range;
+        spawnPosition = spawnPos;
+    }
+
     void FixedUpdate()
     {
+        // 사거리 체크: 발사 위치로부터의 거리가 maxRange를 초과하면 파괴합니다.
+        if (maxRange > 0f)
+        {
+            float distSqr = (transform.position - spawnPosition).sqrMagnitude;
+            if (distSqr > maxRange * maxRange)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         if (hasHit || target == null || rb == null)
             return;
 

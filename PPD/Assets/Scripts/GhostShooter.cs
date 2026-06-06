@@ -66,6 +66,8 @@ public class GhostShooter : MonoBehaviour
         projectile.Launch(direction);
         // 발사 후에도 표적을 추적하도록 유도 대상으로 설정합니다.
         projectile.SetTarget(target.transform);
+        // 사거리 제한을 설정합니다.
+        projectile.SetRange(targetingRange, spawnPos);
     }
 
     private EnemyHealth FindNearestEnemy(Vector3 fromPos)
