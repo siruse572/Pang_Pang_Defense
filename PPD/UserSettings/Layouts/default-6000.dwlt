@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 48
+  controlID: 58
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 345
     height: 625
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 49
+  controlID: 59
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 50
+  controlID: 60
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -725,7 +725,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/GreyratsLab/Stylized magic books/Prefab
+    - Assets/UI/Icons
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -735,36 +735,38 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 78
   m_LastFolders:
-  - Assets/GreyratsLab/Stylized magic books/Prefab
+  - Assets/UI/Icons
   m_LastFoldersGridSize: 78
   m_LastProjectPath: C:\Unity\PPD
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 120}
+    scrollPos: {x: 0, y: 506}
     m_SelectedIDs:
-    - m_Data: 611232
+    - m_Data: 1112950
     m_LastClickedID:
-      m_Data: 611232
+      m_Data: 1112950
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 59276
-    - m_Data: 229068
-    - m_Data: 229070
-    - m_Data: 229074
-    - m_Data: 229078
-    - m_Data: 229080
-    - m_Data: 229082
-    - m_Data: 229084
-    - m_Data: 611212
-    - m_Data: 611248
-    - m_Data: 611250
-    - m_Data: 611294
-    - m_Data: 613638
-    - m_Data: 613644
-    - m_Data: 622614
-    - m_Data: 622618
+    - m_Data: 59272
+    - m_Data: 224934
+    - m_Data: 224936
+    - m_Data: 224938
+    - m_Data: 224940
+    - m_Data: 224942
+    - m_Data: 224944
+    - m_Data: 224946
+    - m_Data: 224948
+    - m_Data: 224950
+    - m_Data: 224952
+    - m_Data: 224954
+    - m_Data: 224956
+    - m_Data: 224958
+    - m_Data: 224960
+    - m_Data: 224962
+    - m_Data: 1112898
+    - m_Data: 1112950
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -799,16 +801,22 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 59276
-    - m_Data: 229068
-    - m_Data: 229070
-    - m_Data: 229072
-    - m_Data: 229074
-    - m_Data: 229076
-    - m_Data: 229078
-    - m_Data: 229080
-    - m_Data: 229082
-    - m_Data: 229084
+    - m_Data: 59272
+    - m_Data: 224934
+    - m_Data: 224936
+    - m_Data: 224938
+    - m_Data: 224940
+    - m_Data: 224942
+    - m_Data: 224944
+    - m_Data: 224946
+    - m_Data: 224948
+    - m_Data: 224950
+    - m_Data: 224952
+    - m_Data: 224954
+    - m_Data: 224956
+    - m_Data: 224958
+    - m_Data: 224960
+    - m_Data: 224962
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -836,10 +844,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: -391798
+    m_SelectedInstanceIDs: []
     m_LastClickedEntityId:
-      m_Data: -391798
+      m_Data: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -918,7 +925,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
     m_Data: 0
-  m_LastVerticalScrollValue: 108
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -965,25 +972,25 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs:
-      - m_Data: -391798
+      m_SelectedIDs: []
       m_LastClickedID:
-        m_Data: -391798
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -293742
-      - m_Data: -284766
-      - m_Data: -125126
-      - m_Data: -125112
-      - m_Data: -100228
-      - m_Data: -17550
-      - m_Data: -17546
-      - m_Data: -17532
-      - m_Data: -7024
-      - m_Data: 75578
+      - m_Data: -72424
+      - m_Data: -72372
+      - m_Data: -72320
+      - m_Data: -72310
+      - m_Data: -72236
+      - m_Data: -63322
+      - m_Data: -63318
+      - m_Data: -63304
+      - m_Data: -1374
+      - m_Data: 66120
+      - m_Data: 172016
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: GameManager
+        m_OriginalName: GameManager
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -991,10 +998,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 0
+          m_Data: 121092
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}
@@ -1559,9 +1566,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -3.998909, y: 1.4847959, z: 9.57027}
+    m_Target: {x: 7.692708, y: 17.714937, z: 7.14978}
     speed: 2
-    m_Value: {x: -3.998909, y: 1.4847959, z: 9.57027}
+    m_Value: {x: 7.692708, y: 17.714937, z: 7.14978}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1608,13 +1615,13 @@ MonoBehaviour:
     m_gridOpacity: 0.5
     m_NearestPlaneToHandleMode: 0
   m_Rotation:
-    m_Target: {x: 0.07514201, y: 0.89379895, z: -0.16442335, w: 0.41007218}
+    m_Target: {x: -0.37486082, y: -0.0013718485, z: 0.0008025775, w: -0.92692703}
     speed: 2
-    m_Value: {x: 0.07515264, y: 0.89392537, z: -0.1644466, w: 0.41013017}
+    m_Value: {x: -0.3749139, y: -0.0013720427, z: 0.0008026911, w: -0.9270583}
   m_Size:
-    m_Target: 0.51779747
+    m_Target: 0.51538813
     speed: 2
-    m_Value: 0.51779747
+    m_Value: 0.51538813
   m_Ortho:
     m_Target: 0
     speed: 2

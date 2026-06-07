@@ -7,6 +7,8 @@ public class UIToggleController : MonoBehaviour
     public GameObject imageObject;
     public GameObject buttonObject;
 
+    public GameObject shop;
+
     void Start()
     {
         toggle.onValueChanged.AddListener(OnToggleChanged);
@@ -18,5 +20,6 @@ public class UIToggleController : MonoBehaviour
 
         imageObject.SetActive(isOn);
         buttonObject.SetActive(isOn);
+        shop.SetActive(isOn);
     }
 }

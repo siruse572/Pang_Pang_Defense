@@ -54,6 +54,7 @@
     <Compile Include="Assets\VRTemplateAssets\Scripts\Rotator.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\XRKnob.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\BooleanToggleVisualsController.cs" />
+    <Compile Include="Assets\Scripts\ShopManager.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\RayAttachModifier.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\XRPokeFollowAffordanceFill.cs" />
