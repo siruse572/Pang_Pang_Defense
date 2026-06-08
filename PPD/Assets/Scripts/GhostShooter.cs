@@ -21,6 +21,12 @@ public class GhostShooter : MonoBehaviour
     [Tooltip("연속 발사 사이의 최소 간격 (초)")]
     public float fireCooldown = 0.25f;
 
+    [Tooltip("회전 속도")]
+    public float rotationSpeed = 5f;
+
+    [Tooltip("시각적 요소가 포함된 피벗 (소켓 장착 시 루트 회전이 고정될 수 있으므로 별도 회전용)")]
+    public Transform visualsPivot;
+
     private float lastFireTime = -999f;
 
     void Update()
@@ -29,19 +35,39 @@ public class GhostShooter : MonoBehaviour
         Vector3 spawnPos = GetSpawnPos();
         EnemyHealth target = FindNearestEnemy(spawnPos);
 
-        // 표적이 있고 쿨다운이 지났으면 자동으로 발사합니다.
-        if (target != null && Time.time - lastFireTime >= fireCooldown)
+        if (target != null)
         {
-            Fire(target, spawnPos);
-            lastFireTime = Time.time;
+            RotateTowardsTarget(target.transform.position);
+
+            // 표적이 있고 쿨다운이 지났으면 자동으로 발사합니다.
+            if (Time.time - lastFireTime >= fireCooldown)
+            {
+                Fire(target, spawnPos);
+                lastFireTime = Time.time;
+            }
+        }
+    }
+
+    private void RotateTowardsTarget(Vector3 targetPos)
+    {
+        Transform rotateTransform = visualsPivot != null ? visualsPivot : transform;
+        Vector3 direction = (targetPos - rotateTransform.position);
+        direction.y = 0; // horizontal rotation only
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            rotateTransform.rotation = Quaternion.Slerp(rotateTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
     private Vector3 GetSpawnPos()
     {
-        return muzzlePoint != null
-            ? muzzlePoint.position
-            : transform.position + transform.forward * 0.6f + Vector3.up * 0.5f;
+        if (muzzlePoint != null)
+            return muzzlePoint.position;
+
+        Transform forwardTransform = visualsPivot != null ? visualsPivot : transform;
+        return transform.position + forwardTransform.forward * 0.6f + Vector3.up * 0.5f;
     }
 
     private void Fire(EnemyHealth target, Vector3 spawnPos)

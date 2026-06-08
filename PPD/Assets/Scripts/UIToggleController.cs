@@ -9,6 +9,8 @@ public class UIToggleController : MonoBehaviour
 
     public GameObject shop;
 
+    public GameObject wavetext;
+
     void Start()
     {
         toggle.onValueChanged.AddListener(OnToggleChanged);
@@ -21,5 +23,6 @@ public class UIToggleController : MonoBehaviour
         imageObject.SetActive(isOn);
         buttonObject.SetActive(isOn);
         shop.SetActive(isOn);
+        wavetext.SetActive(isOn);
     }
 }
