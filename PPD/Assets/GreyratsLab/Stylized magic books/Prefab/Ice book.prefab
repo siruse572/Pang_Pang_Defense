@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::XRBookShooter
   projectilePrefab: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}
   muzzlePoint: {fileID: 7877380185767118166}
-  fireCooldown: 0.25
+  fireCooldown: 0.5
   targetingRange: 0
   homingConeAngle: 90
   grabRotationX: 90

@@ -90,9 +90,12 @@ public class EnemyMovement : MonoBehaviour
             
             AttackTarget();
             
+            // 보스 에너미는 Candy를 공격할 때 10의 데미지를, 일반 에너미는 1의 데미지를 줍니다.
+            int damageAmount = gameObject.name.StartsWith("Boss_") ? 10 : 1;
+            
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.ReduceCandy(1);
+                GameManager.Instance.ReduceCandy(damageAmount);
             }
 
             if (spawner != null)

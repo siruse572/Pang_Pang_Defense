@@ -189,10 +189,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhostShooter
   cubePrefab: {fileID: 1223526616464650, guid: 682715b94f038d64c9ed66ab6f1af5d1, type: 3}
   muzzlePoint: {fileID: 0}
-  targetingRange: 0
-  fireCooldown: 0.25
+  targetingRange: 2
+  fireCooldown: 0.5
   rotationSpeed: 10
   visualsPivot: {fileID: 1312626471257515126}
+  rangePrefab: {fileID: 6590756500109780908, guid: dd2ecdd15428316408a4836214e9985b, type: 3}
 --- !u!114 &1521367302389909959
 MonoBehaviour:
   m_ObjectHideFlags: 0

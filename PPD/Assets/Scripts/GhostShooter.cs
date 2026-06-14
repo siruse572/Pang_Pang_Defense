@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 /// <summary>
 /// 'a' 오브젝트에 부착되어, 사거리 내 적을 자동으로 탐지해 Cube 발사체를 자동 발사합니다.
@@ -27,7 +30,79 @@ public class GhostShooter : MonoBehaviour
     [Tooltip("시각적 요소가 포함된 피벗 (소켓 장착 시 루트 회전이 고정될 수 있으므로 별도 회전용)")]
     public Transform visualsPivot;
 
+    [Header("Range Visual")]
+    [Tooltip("그랩 시 표시할 사거리 프리팹")]
+    public GameObject rangePrefab;
+
     private float lastFireTime = -999f;
+    private XRGrabInteractable grabInteractable;
+    private GameObject rangeInstance;
+
+    private void Awake()
+    {
+        grabInteractable = GetComponent<XRGrabInteractable>();
+    }
+
+    private void Start()
+    {
+        if (rangePrefab != null && targetingRange > 0f)
+        {
+            rangeInstance = Instantiate(rangePrefab, transform);
+            rangeInstance.transform.localPosition = new Vector3(0f, 0.05f, 0f); // slight offset to prevent z-fighting
+            rangeInstance.transform.localRotation = Quaternion.Euler(270f, 0f, 0f);
+            rangeInstance.transform.localScale = Vector3.one * (targetingRange * 2f);
+            rangeInstance.SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.AddListener(OnGrabbed);
+            grabInteractable.selectExited.AddListener(OnReleased);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnGrabbed);
+            grabInteractable.selectExited.RemoveListener(OnReleased);
+        }
+    }
+
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        // Only show range if grabbed by a controller/hand, not by a socket interactor
+        if (args.interactorObject is XRSocketInteractor)
+        {
+            return;
+        }
+
+        if (rangeInstance != null)
+        {
+            rangeInstance.SetActive(true);
+        }
+    }
+
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        if (rangeInstance != null)
+        {
+            rangeInstance.SetActive(false);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (rangeInstance != null && rangeInstance.activeSelf)
+        {
+            // Keep the range flat on the horizontal plane
+            rangeInstance.transform.rotation = Quaternion.Euler(270f, 0f, 0f);
+        }
+    }
 
     void Update()
     {

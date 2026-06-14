@@ -26,6 +26,15 @@ public class EnemyHealth : MonoBehaviour
     }
 
     /// <summary>
+    /// 최대 체력과 현재 체력을 재설정합니다 (예: 보스 몬스터 설정 시 사용).
+    /// </summary>
+    public void SetMaxHealth(int newMaxHealth)
+    {
+        maxHealth = newMaxHealth;
+        currentHealth = newMaxHealth;
+    }
+
+    /// <summary>
     /// 적에게 데미지를 입힙니다.
     /// </summary>
     /// <param name="amount">감소시킬 체력 양</param>
@@ -36,6 +45,14 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
         Debug.Log($"{gameObject.name} 체력: {currentHealth}/{maxHealth}");
+
+        // 데미지 플래시 연출 실행
+        DamageFlash flash = GetComponent<DamageFlash>();
+        if (flash == null)
+        {
+            flash = gameObject.AddComponent<DamageFlash>();
+        }
+        flash.Flash();
 
         if (currentHealth <= 0)
         {
