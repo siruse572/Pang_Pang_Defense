@@ -14614,7 +14614,7 @@ MonoBehaviour:
   speed: 15
   damage: 1
   lifeTime: 5
-  turnSpeed: 360
+  turnSpeed: 2000
 --- !u!1 &1430769185673144
 GameObject:
   m_ObjectHideFlags: 0

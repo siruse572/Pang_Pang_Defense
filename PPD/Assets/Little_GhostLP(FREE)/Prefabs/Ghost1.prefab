@@ -412,7 +412,8 @@ MonoBehaviour:
   cubePrefab: {fileID: 1692517446758730, guid: 08fd1b80cc24cc8439f45fda3c558255, type: 3}
   muzzlePoint: {fileID: 0}
   targetingRange: 1
-  fireCooldown: 1
+  attackDamage: 1
+  fireCooldown: 0.25
   rotationSpeed: 10
   visualsPivot: {fileID: 6480405516629921676}
   rangePrefab: {fileID: 6590756500109780908, guid: dd2ecdd15428316408a4836214e9985b, type: 3}

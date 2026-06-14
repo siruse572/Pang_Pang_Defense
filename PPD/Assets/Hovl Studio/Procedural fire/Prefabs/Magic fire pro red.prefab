@@ -24310,4 +24310,4 @@ MonoBehaviour:
   speed: 15
   damage: 1
   lifeTime: 5
-  turnSpeed: 360
+  turnSpeed: 2000

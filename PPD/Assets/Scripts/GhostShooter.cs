@@ -20,6 +20,10 @@ public class GhostShooter : MonoBehaviour
     [Tooltip("자동 탐지/발사가 동작하는 최대 사거리 (0 이하이면 무제한)")]
     public float targetingRange = 0f;
 
+    [Header("Combat")]
+    [Tooltip("이 타워의 공격력. 발사체가 적에게 입히는 데미지로 사용됩니다.")]
+    public int attackDamage = 1;
+
     [Header("Fire Rate")]
     [Tooltip("연속 발사 사이의 최소 간격 (초)")]
     public float fireCooldown = 0.25f;
@@ -104,11 +108,29 @@ public class GhostShooter : MonoBehaviour
         }
     }
 
+    public bool IsInSocket()
+    {
+        if (grabInteractable == null) return false;
+        foreach (var interactor in grabInteractable.interactorsSelecting)
+        {
+            if (interactor is XRSocketInteractor)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void Update()
     {
+        if (!IsInSocket())
+            return;
+
         // 사거리 내 가장 가까운 적을 자동으로 탐지합니다.
+        // 탐지는 사거리 표시(range 원)와 동일하게 타워 본체(transform)를 기준으로 측정합니다.
+        // (발사구 spawnPos는 앞/위로 오프셋되어 있어 기준으로 쓰면 실제 사거리가 줄어듭니다.)
         Vector3 spawnPos = GetSpawnPos();
-        EnemyHealth target = FindNearestEnemy(spawnPos);
+        EnemyHealth target = FindNearestEnemy(transform.position);
 
         if (target != null)
         {
@@ -164,11 +186,16 @@ public class GhostShooter : MonoBehaviour
         if (projectile == null)
             projectile = cube.AddComponent<CubeProjectile>();
 
+        // 이 타워의 공격력을 발사체 데미지로 전달합니다.
+        projectile.damage = attackDamage;
+
         projectile.Launch(direction);
         // 발사 후에도 표적을 추적하도록 유도 대상으로 설정합니다.
         projectile.SetTarget(target.transform);
-        // 사거리 제한을 설정합니다.
-        projectile.SetRange(targetingRange, spawnPos);
+        // 사거리 제한을 설정합니다. 타워 본체를 기준으로 측정하고, 발사구 오프셋과
+        // 유도 곡선/적의 이동으로 실제 비행 거리가 사거리를 약간 넘더라도 명중할 수
+        // 있도록 여유분(2유닛)을 더합니다. (lifeTime이 무한 비행을 별도로 방지합니다.)
+        projectile.SetRange(targetingRange + 2f, transform.position);
     }
 
     private EnemyHealth FindNearestEnemy(Vector3 fromPos)

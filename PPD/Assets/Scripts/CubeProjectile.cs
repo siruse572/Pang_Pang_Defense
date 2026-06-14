@@ -19,7 +19,7 @@ public class CubeProjectile : MonoBehaviour
 
     [Header("Homing (유도)")]
     [Tooltip("표적을 향해 회전하는 속도 (도/초). 값이 클수록 더 급격하게 유도됩니다.")]
-    public float turnSpeed = 360f;
+    public float turnSpeed = 2000f;
 
     private Rigidbody rb;
     private bool hasHit;
