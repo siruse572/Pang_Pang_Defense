@@ -35,7 +35,25 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        spawner = FindFirstObjectByType<EnemySpawner>();
+        if (spawner == null)
+        {
+            spawner = Object.FindAnyObjectByType<EnemySpawner>();
+        }
+
+        if (candyTarget == null)
+        {
+            GameObject candyObj = GameObject.Find("Candy");
+            if (candyObj != null)
+            {
+                candyTarget = candyObj.transform;
+                Debug.Log($"{gameObject.name}: candyTarget이 비어있어 자동으로 'Candy' 오브젝트를 할당했습니다.");
+            }
+            else
+            {
+                Debug.LogError($"{gameObject.name}: candyTarget이 비어있고 씬에서 'Candy' 오브젝트를 찾을 수 없습니다!");
+            }
+        }
+
         // 4. NavMesh.SamplePosition을 사용하여 가장 가까운 NavMesh 위로 위치를 보정(Warp)
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, navMeshSampleRadius, NavMesh.AllAreas))
         {
@@ -52,6 +70,29 @@ public class EnemyMovement : MonoBehaviour
                            "스폰 위치가 NavMesh 영역 안에 있는지 확인하세요.");
         }
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (candyTarget == null)
+        {
+            GameObject candyObj = GameObject.Find("Candy");
+            if (candyObj != null)
+            {
+                candyTarget = candyObj.transform;
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+        }
+        if (spawner == null)
+        {
+            spawner = Object.FindAnyObjectByType<EnemySpawner>();
+            if (spawner != null)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+        }
+    }
+#endif
 
     void Update()
     {

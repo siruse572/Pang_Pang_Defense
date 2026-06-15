@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhostShooter
   cubePrefab: {fileID: 1692517446758730, guid: 08fd1b80cc24cc8439f45fda3c558255, type: 3}
   muzzlePoint: {fileID: 0}
-  targetingRange: 1
+  targetingRange: 3
   attackDamage: 1
   fireCooldown: 0.25
   rotationSpeed: 10

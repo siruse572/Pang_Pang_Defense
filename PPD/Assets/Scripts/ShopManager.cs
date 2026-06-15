@@ -111,6 +111,13 @@ public class ShopManager : MonoBehaviour
             // Use Camera.main as the primary reference for "Player's Front"
             Transform refTransform = Camera.main != null ? Camera.main.transform : (playerTransform != null ? playerTransform : transform);
             
+            if (item.prefab == null)
+            {
+#if UNITY_EDITOR
+                AutoAssignMissingPrefabs(currentItems);
+#endif
+            }
+
             if (item.prefab != null)
             {
                 // Calculate direction (flattened to horizontal plane)
@@ -133,7 +140,7 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Prefab missing!");
+                Debug.LogError("[ShopManager] Cannot purchase " + item.name + ": Prefab is missing and auto-assignment failed! Please check your project for a prefab named '" + item.name + "'.");
             }
         }
         else
@@ -141,4 +148,58 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Not enough gold! Need " + item.price + " Gold.");
         }
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        AutoAssignMissingPrefabs(ghostItems);
+        AutoAssignMissingPrefabs(bookItems);
+    }
+
+    private void AutoAssignMissingPrefabs(List<ShopItem> items)
+    {
+        if (items == null) return;
+        foreach (var item in items)
+        {
+            if (item.prefab == null && !string.IsNullOrEmpty(item.name))
+            {
+                string searchName = item.name;
+                string[] guids = UnityEditor.AssetDatabase.FindAssets(searchName + " t:Prefab");
+                if (guids.Length == 0)
+                {
+                    searchName = item.name.Replace(" ", "");
+                    guids = UnityEditor.AssetDatabase.FindAssets(searchName + " t:Prefab");
+                }
+
+                if (guids.Length > 0)
+                {
+                    string bestPath = null;
+                    foreach (var guid in guids)
+                    {
+                        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                        string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                        if (fileName.Equals(item.name, System.StringComparison.OrdinalIgnoreCase) ||
+                            fileName.Equals(item.name.Replace(" ", ""), System.StringComparison.OrdinalIgnoreCase))
+                        {
+                            bestPath = path;
+                            break;
+                        }
+                    }
+
+                    if (bestPath == null)
+                    {
+                        bestPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
+                    }
+
+                    item.prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(bestPath);
+                    if (item.prefab != null)
+                    {
+                        Debug.Log("[ShopManager] Automatically assigned missing prefab '" + item.prefab.name + "' for item '" + item.name + "' to prevent bugs.");
+                        UnityEditor.EditorUtility.SetDirty(this);
+                    }
+                }
+            }
+        }
+    }
+#endif
 }

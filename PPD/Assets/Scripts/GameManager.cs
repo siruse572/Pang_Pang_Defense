@@ -76,14 +76,14 @@ public class GameManager : MonoBehaviour
         UpdateUI();
 
         // 2. Reset EnemySpawner
-        EnemySpawner spawner = FindFirstObjectByType<EnemySpawner>();
+        EnemySpawner spawner = FindAnyObjectByType<EnemySpawner>();
         if (spawner != null)
         {
             spawner.ResetSpawner();
         }
 
         // 3. Destroy all enemies in the scene
-        EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(FindObjectsInactive.Exclude);
         foreach (var enemy in enemies)
         {
             if (enemy != null)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 4. Destroy all projectiles
-        CubeProjectile[] projectiles = FindObjectsByType<CubeProjectile>(FindObjectsSortMode.None);
+        CubeProjectile[] projectiles = FindObjectsByType<CubeProjectile>(FindObjectsInactive.Exclude);
         foreach (var proj in projectiles)
         {
             if (proj != null)
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 5. Destroy all purchased towers/allies from shop
-        GhostShooter[] ghosts = FindObjectsByType<GhostShooter>(FindObjectsSortMode.None);
+        GhostShooter[] ghosts = FindObjectsByType<GhostShooter>(FindObjectsInactive.Exclude);
         foreach (var ghost in ghosts)
         {
             if (ghost != null)
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        XRBookShooter[] books = FindObjectsByType<XRBookShooter>(FindObjectsSortMode.None);
+        XRBookShooter[] books = FindObjectsByType<XRBookShooter>(FindObjectsInactive.Exclude);
         foreach (var book in books)
         {
             if (book != null)

@@ -25,10 +25,29 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemyCount;
     public int currentWave;
     private bool isWaveRunning;
+    private bool isSpawning;
 
     private void Start()
     {
         UpdateWaveUI();
+    }
+
+    private void Update()
+    {
+        if (isWaveRunning)
+        {
+            // Fail-safe: 스폰이 완료되었는데 씬에 살아있는 적이 0명인 경우 자동으로 웨이브를 정상 종료시킵니다.
+            if (!isSpawning)
+            {
+                int activeEnemies = Object.FindObjectsByType<EnemyHealth>(FindObjectsInactive.Exclude).Length;
+                if (activeEnemies == 0 && currentEnemyCount > 0)
+                {
+                    Debug.LogWarning($"[EnemySpawner] Fail-safe Triggered: No active enemies in scene but currentEnemyCount was {currentEnemyCount}. Forcing wave end!");
+                    currentEnemyCount = 0;
+                    EnemyDestroyed();
+                }
+            }
+        }
     }
 
     public void StartWave()
@@ -45,6 +64,7 @@ public class EnemySpawner : MonoBehaviour
         int enemyCount = currentWave * 5;
         currentEnemyCount = enemyCount;
         isWaveRunning = true;
+        isSpawning = true;
 
         if (startButton != null)
         {
@@ -73,6 +93,7 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy(isBoss);
             yield return new WaitForSeconds(spawnInterval);
         }
+        isSpawning = false;
     }
 
     private void SpawnEnemy(bool isBoss = false)
@@ -170,6 +191,7 @@ public class EnemySpawner : MonoBehaviour
     {
         StopAllCoroutines();
         isWaveRunning = false;
+        isSpawning = false;
         currentWave = 0;
         currentEnemyCount = 0;
 

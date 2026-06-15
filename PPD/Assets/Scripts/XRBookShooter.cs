@@ -144,7 +144,7 @@ public class XRBookShooter : MonoBehaviour
 
     private EnemyHealth FindNearestEnemy(Vector3 fromPos, Vector3 forward)
     {
-        EnemyHealth[] enemies = Object.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        EnemyHealth[] enemies = Object.FindObjectsByType<EnemyHealth>(FindObjectsInactive.Exclude);
         EnemyHealth nearest = null;
         float bestSqr = float.MaxValue;
         float rangeSqr = targetingRange > 0f ? targetingRange * targetingRange : float.MaxValue;

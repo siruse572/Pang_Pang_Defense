@@ -200,7 +200,7 @@ public class GhostShooter : MonoBehaviour
 
     private EnemyHealth FindNearestEnemy(Vector3 fromPos)
     {
-        EnemyHealth[] enemies = Object.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        EnemyHealth[] enemies = Object.FindObjectsByType<EnemyHealth>(FindObjectsInactive.Exclude);
         EnemyHealth nearest = null;
         float bestSqr = float.MaxValue;
         float rangeSqr = targetingRange > 0f ? targetingRange * targetingRange : float.MaxValue;
@@ -216,4 +216,16 @@ public class GhostShooter : MonoBehaviour
         }
         return nearest;
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (targetingRange > 0f && targetingRange < 3.0f)
+        {
+            Debug.LogWarning($"[GhostShooter] '{gameObject.name}'의 targetingRange가 너무 낮습니다 ({targetingRange}). 일반적인 타일 크기(1x1)를 고려해 최소 3.0 이상으로 자동 조정합니다.");
+            targetingRange = 3.0f;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+#endif
 }
